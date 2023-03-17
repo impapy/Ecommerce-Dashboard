@@ -1,0 +1,25 @@
+.card-1 {
+    border: none;
+    border-radius: 10px;
+    width: 80%;
+    background-color: #fff
+}
+
+.th1{
+    width: 5%;
+}
+
+.th2{
+    width: 20%;
+}
+
+.th3{
+    width: 30%;
+}
+
+.th4{
+    width: 30%;
+}
+.th5{
+    width: 15%;
+}

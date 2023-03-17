@@ -1,0 +1,72 @@
+import React from 'react'
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { cancelOrder, details, changStatusOrder } from '../../redux/actions/orderAction'
+import '../../components/UserTable/UserTable.css';
+
+
+export default function SellerOrdersTable({ orderData, index }) {
+    let dispatch = useDispatch()
+    let totalPriceOfOrder = [];
+        let pricePerProduct;
+    orderData.orderItems.forEach(item=>{
+        pricePerProduct = item.price * item.quantity
+        totalPriceOfOrder.push(pricePerProduct)
+    })
+    const sum = totalPriceOfOrder.reduce((a,b)=> a+b)   
+    return (
+            <tr className="border-bottom">
+                <td className="col  td1">
+                    <div className="p-2 d-flex flex-row align-items-center mb-2">
+                        <div className="d-flex flex-column ml-2"> <span className="d-block font-weight-bold">{index}</span></div>
+                    </div>
+                </td>
+                <td className="col  td1">
+                    <div className="p-2 d-flex flex-row align-items-center mb-2">
+                        <div className="d-flex flex-column ml-2"> <Link to='/orderDetails' className="d-block font-weight-bold text-decoration-underline"
+                            onClick={() => { dispatch(details(orderData._id)) }} data-toggle="modal" data-target="#staticBackdrop">
+                            {orderData._id.slice(0,12)}</Link></div>
+                    </div>
+                </td>
+                <td className="col  td1">
+                    <div className="p-2 d-flex flex-row align-items-center mb-2">
+                        <div className="d-flex flex-column ml-2"> <span className="d-block font-weight-bold">{orderData.orderItems.length}
+                        </span></div>
+                    </div>
+                </td>
+                <td className="col  td1">
+                    <div className="p-2 d-flex flex-row align-items-center mb-2">
+                        <div className="d-flex flex-column ml-2"> <span className="d-block font-weight-bold">{sum}
+                        </span></div>
+                    </div>
+                </td>
+                {/* <td className="col  td1">
+                    <div className="p-2 d-flex flex-row align-items-center mb-2">
+                        <div className="d-flex flex-column ml-2"> <span className="d-block font-weight-bold">
+                            <div>{orderData.isDelivered ?
+                                (<h6 className="badge rounded-pill bg-success">Delivered</h6>) :
+                                (<><button className="btn btn-btn   mt-3" disabled={!orderData.isPaid || orderData.isCancelled}
+                                    onClick={() => { dispatch(changStatusOrder(orderData._id)) }}> Deliver </button></>)
+                            }
+                                {orderData.isPaid ?
+                                    (<h6 className="badge rounded-pill bg-info">Paid</h6>) :
+                                    (<><button className="btn btn-btn   mt-3" disabled={orderData.isCancelled}
+                                        onClick={() => { dispatch(changStatusOrder(orderData._id)) }}> Pay </button></>)
+                                }
+                            </div>
+                        </span></div>
+                    </div>
+                </td>
+                <td className="col  td1">
+                    <div className="p-2 d-flex flex-row align-items-center mb-2">
+                        <div className="d-flex flex-column ml-2"> <span className="d-block font-weight-bold">
+                            {orderData.isCancelled ? (<h6 className="badge rounded-pill bg-danger">Cancelled</h6>) :
+                                (<><button type="button" className="btn btn-btn   mt-3" disabled={orderData.isDelivered}
+                                    onClick={() => { dispatch(cancelOrder(orderData._id)) }}>Cancel</button></>)}
+                        </span></div>
+                    </div>
+                </td> */}
+            </tr>
+            
+    )
+}

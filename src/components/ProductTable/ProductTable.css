@@ -1,0 +1,12 @@
+.dszignimage{
+    width: 20%;
+        border-radius: 50%;
+        height: 60px;
+    }
+    
+    .showicon,.star-rating{
+        color: orange;
+    }
+    .showicon:hover{
+        color: greenyellow
+    }
